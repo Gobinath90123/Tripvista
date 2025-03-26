@@ -1,5 +1,5 @@
 require('dotenv').config();
-export const testDir = './tests';
+//export const testDir = './tests';
 export const timeout = 60000;
 export const retries = process.env.CI ? 2 : 0;
 export const workers = process.env.CI ? 1 : 1;
@@ -9,7 +9,6 @@ export const reporter = [
   ['list'],
   [`./CustomReporterConfig.ts`],
   ['junit', { outputFile: './report/results.xml' }],
-  ['allure-playwright'],
   ['monocart-reporter', {
     name: "Goperla 2.0 Automation Test Report",
     outputFile: './report/monocart-report/index.html',
