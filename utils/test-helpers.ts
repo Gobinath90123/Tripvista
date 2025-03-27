@@ -1,5 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 import { Logger } from '../utils/logger';
+import { baseURL } from '../playwright.config.js';
 
 function getRandomDelay(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -191,4 +192,17 @@ export async function waitForTimeout(page: Page, min:number, max:number, message
     Logger.info(`⏳ ${logMessage}`);
     await page.waitForTimeout(duration);
   });
+}
+
+// utils/login.js
+export async function loginCredentials(page, email, password) {
+  await page.getByRole('textbox', { name: 'Enter your email' }).fill(email);
+  await page.getByRole('textbox', { name: 'Enter your password' }).fill(password);
+  await page.getByRole('button', { name: 'Login' }).click();
+}
+
+
+
+export async function navigation(page) {
+  await page.goto(baseURL, { waitUntil: 'load' });
 }
